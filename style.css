@@ -136,4 +136,35 @@ th, td {
   canvas {
     max-width: 100%;
   }
+  .chart-result {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.chart-box {
+  flex: 0 1 300px;
+}
+
+.chart-text {
+  max-width: 400px;
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.table-pair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.table-box {
+  flex: 1;
+  min-width: 300px;
+}
+
 }
