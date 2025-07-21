@@ -19,27 +19,32 @@
     <button onclick="calculate()">Calcola Probabilità</button>
   </div>
 
-  <div class="output-section">
+<div class="output-section">
   <div class="chart-result">
     <div class="chart-box">
       <canvas id="chartStay"></canvas>
     </div>
+    
     <div class="chart-text" id="output"></div>
+    
     <div class="chart-box">
       <canvas id="chartHit"></canvas>
     </div>
   </div>
 </div>
 
+<div class="table-pair">
+  <div class="table-box" id="tableStay"></div>
+  <div class="table-box" id="tableHitAgain"></div>
+</div>
+
+
 
   <div class="table-container">
     <div id="tableStay"></div>
     <div id="tableHitAgain"></div>
   </div>
-  <div class="table-pair">
-  <div id="tableStay" class="table-box"></div>
-  <div id="tableHitAgain" class="table-box"></div>
-</div>
+
 
   <div id="decisionSummary"></div>
   <script src="script.js"></script>
