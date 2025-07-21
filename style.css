@@ -1,0 +1,214 @@
+<style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 30px auto;
+      max-width: 960px;
+      background-color: #f8f9fa;
+      color: #212529;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 0 20px;
+    }
+
+    input, button {
+      margin: 8px 5px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ced4da;
+      font-size: 15px;
+    }
+
+    input:focus, button:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    h1 {
+      color: #1d3557;
+      text-align: center;
+      font-size: 60px;
+      margin-bottom: 30px;
+    }
+
+    h2, h3 {
+      color: #2c3e50;
+      margin-top: 25px;
+    }
+
+    label {
+      display: inline-block;
+      margin: 5px 0;
+      font-size: 15px;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      background-color: white;
+    }
+
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f1f3f5;
+    }
+
+    .output-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 30px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    canvas {
+      max-width: 220px;
+      max-height: 220px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin: 8px 0;
+      font-size: 15px;
+    }
+
+    .table-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      justify-content: space-between;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .table-container > div {
+      flex: 1 1 48%;
+      min-width: 300px;
+    }
+
+    .ev-positive {
+      color: green;
+      font-weight: bold;
+    }
+
+    .ev-negative {
+      color: red;
+      font-weight: bold;
+    }
+
+    .ev-neutral {
+      color: #888;
+      font-weight: bold;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .dark-mode th {
+      background-color: #333;
+    }
+
+    .dark-mode table,
+    .dark-mode input,
+    .dark-mode button {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      border: 1px solid #444;
+    }
+
+    .dark-mode canvas {
+      background-color: #1e1e1e;
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+    }
+
+    .dark-mode tr:hover {
+      background-color: #2a2a2a;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      label {
+        display: block;
+        width: 100%;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 15px;
+      }
+
+      .output-section {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      canvas {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100%;
+      }
+
+      .table-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      table {
+        font-size: 12px;
+      }
+    }
+  </style>
