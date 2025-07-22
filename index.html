@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blackjack Pro - Tavolo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="logo">♣ Blackjack Pro</h1>
+    <nav>
+      <a href="index.html">Tavolo</a>
+      <a href="simulatore.html">Simulatore</a>
+    </nav>
+  </header>
+
+  <main class="game-table">
+    <div class="player cpu" id="cpu1">
+      <h2>CPU 1</h2>
+      <div class="hand" id="handCpu1"></div>
+      <div class="score" id="scoreCpu1"></div>
+    </div>
+
+    <div class="dealer" id="dealer">
+      <h2>Banco</h2>
+      <div class="hand" id="handDealer"></div>
+      <div class="score" id="scoreDealer"></div>
+    </div>
+
+    <div class="player cpu" id="cpu2">
+      <h2>CPU 2</h2>
+      <div class="hand" id="handCpu2"></div>
+      <div class="score" id="scoreCpu2"></div>
+    </div>
+
+    <div class="player human" id="player">
+      <h2>Tu</h2>
+      <div class="hand" id="handPlayer"></div>
+      <div class="score" id="scorePlayer"></div>
+      <div class="controls">
+        <button id="hitBtn">Carta</button>
+        <button id="standBtn">Stai</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
