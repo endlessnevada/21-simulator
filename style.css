@@ -191,15 +191,9 @@ th {
 
 
 .card {
-  background: white;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 1.2rem;
-  width: 40px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 60px;
+  height: auto;
+  border-radius: 4px;
   box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
 }
 .score { margin-top: 0.5rem; font-weight: 600; }
