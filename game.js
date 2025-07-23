@@ -118,8 +118,8 @@ function renderDealer(showAll = false) {
 }
 
 
-function dealInitialCards() {
-  deck = createDeck();
+function dealInitialCards(numDecks = 1) {
+  deck = createDeck(numDecks);
   shuffle(deck);
 
   for (let player of players) {
@@ -133,6 +133,7 @@ function dealInitialCards() {
   players.forEach((_, i) => renderPlayerHand(i));
   renderDealer();
 }
+
 
 function playerHit(index) {
   const player = players[index];
@@ -187,3 +188,17 @@ function showResults() {
 }
 
 window.onload = dealInitialCards;
+document.getElementById('startGameBtn').addEventListener('click', () => {
+  const numDecksInput = document.getElementById('numDecks');
+  const numDecks = parseInt(numDecksInput.value);
+
+  if (!numDecks || numDecks < 1 || numDecks > 8) {
+    alert("Inserisci un numero valido di mazzi (1-8)");
+    return;
+  }
+
+  // Mostra il tavolo e avvia la partita
+  document.getElementById('gameTable').style.display = 'flex';
+  document.querySelector('.setup-container').style.display = 'none';
+  dealInitialCards(numDecks);
+});
