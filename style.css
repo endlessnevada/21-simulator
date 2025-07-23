@@ -7,11 +7,13 @@ body {
   line-height: 1.5;
 }
 body.tavolo-page {
- background-image: url('table-bg.png') no-repeat center center;
+  background-image: url('table-bg.png');
   background-size: cover;
-   background-color: #254334; /* Sfondo default */
-
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* opzionale */
 }
+
 
 
 h1 {
