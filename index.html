@@ -17,14 +17,7 @@
   </header>
 
   <main class="game-table">
-
-    <div class="player" id="player1">
-      <h2>CPU 1</h2>
-      <div class="hand"></div>
-      <div class="score"></div>
-      <div class="status"></div>
-    </div>
-
+    <!-- Banco in alto -->
     <div class="dealer" id="dealer">
       <h2>Banco</h2>
       <div class="hand"></div>
@@ -32,24 +25,33 @@
       <div class="status"></div>
     </div>
 
-    <div class="player" id="player2">
-      <h2>CPU 2</h2>
-      <div class="hand"></div>
-      <div class="score"></div>
-      <div class="status"></div>
-    </div>
+    <!-- Riga con i 3 giocatori: CPU1 - Tu - CPU2 -->
+    <div class="bottom-row">
+      <div class="player" id="player1">
+        <h2>CPU 1</h2>
+        <div class="hand"></div>
+        <div class="score"></div>
+        <div class="status"></div>
+      </div>
 
-    <div class="player" id="player0">
-      <h2>Tu</h2>
-      <div class="hand"></div>
-      <div class="score"></div>
-      <div class="status"></div>
-      <div class="controls">
-        <button onclick="playerHit(0)">Carta</button>
-        <button onclick="playerStand(0); cpuPlays()">Stai</button>
+      <div class="player" id="player0">
+        <h2>Tu</h2>
+        <div class="hand"></div>
+        <div class="score"></div>
+        <div class="status"></div>
+        <div class="controls">
+          <button onclick="playerHit(0)">Carta</button>
+          <button onclick="playerStand(0); cpuPlays()">Stai</button>
+        </div>
+      </div>
+
+      <div class="player" id="player2">
+        <h2>CPU 2</h2>
+        <div class="hand"></div>
+        <div class="score"></div>
+        <div class="status"></div>
       </div>
     </div>
-
   </main>
 
   <script src="game.js"></script>
