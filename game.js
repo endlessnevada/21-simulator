@@ -8,19 +8,22 @@ const dealer = { id: 'dealer', hand: [], stand: false };
 
 let deck = [];
 
-function createDeck() {
+function createDeck(num = 1) {
   const suits = ['♠', '♥', '♦', '♣'];
   const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
   const newDeck = [];
 
-  for (let suit of suits) {
-    for (let value of values) {
-      newDeck.push(value + suit);
+  for (let d = 0; d < num; d++) {
+    for (let suit of suits) {
+      for (let value of values) {
+        newDeck.push(value + suit);
+      }
     }
   }
 
   return newDeck;
 }
+
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -126,7 +129,10 @@ function renderDealer(showAll = false) {
 
 
 function dealInitialCards(numDecks = 1) {
-  deck = createDeck(numDecks);
+  deck = createDeck(numDecks); // <-- numDecks passato correttamente
+console.log(`Numero di mazzi selezionato: ${numDecks}`);
+console.log(`Carte totali nel mazzo: ${deck.length}`); // dovrebbe essere 52 * numDecks
+
   shuffle(deck);
 
   for (let player of players) {
