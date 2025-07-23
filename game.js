@@ -94,22 +94,29 @@ function renderPlayerHand(index) {
   }
 }
 
-function renderDealer() {
+function renderDealer(showAll = false) {
   const div = document.getElementById(dealer.id);
   const handDiv = div.querySelector('.hand');
   const scoreDiv = div.querySelector('.score');
+  const statusDiv = div.querySelector('.status');
 
   handDiv.innerHTML = '';
-  dealer.hand.forEach(card => {
-    const cardDiv = document.createElement('div');
+
+  dealer.hand.forEach((card, index) => {
     const cardImg = document.createElement('img');
-    cardImg.src = `cards/${getCardFilename(card)}`;
+    if (index === 1 && !showAll) {
+      cardImg.src = `cards/back.png`; // immagine della carta coperta
+    } else {
+      cardImg.src = `cards/${getCardFilename(card)}`;
+    }
     cardImg.className = 'card';
     handDiv.appendChild(cardImg);
   });
 
-  scoreDiv.textContent = `Punteggio: ${calculateScore(dealer.hand)}`;
+  const score = showAll ? calculateScore(dealer.hand) : getCardValue(dealer.hand[0]);
+  scoreDiv.textContent = `Punteggio: ${score}`;
 }
+
 
 function dealInitialCards() {
   deck = createDeck();
@@ -157,7 +164,7 @@ function dealerPlays() {
     dealer.hand.push(deck.pop());
   }
   dealer.stand = true;
-  renderDealer();
+  renderDealer(true);
   showResults();
 }
 
