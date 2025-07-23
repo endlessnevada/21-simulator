@@ -2,8 +2,10 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 1rem;
-  background-color: #f5f5f5;
-  color: #333;
+  background: url('table-bg.jpg') no-repeat center center;
+  background-size: contain; /* o 'cover' se preferisci riempire */
+  background-color: #254334; /* fallback */
+  color: #fff
   line-height: 1.5;
 }
 
