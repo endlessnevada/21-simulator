@@ -16,8 +16,17 @@
     </nav>
   </header>
 
-  <main class="game-table">
-    <!-- Banco in alto -->
+ 
+  <!-- Selezione mazzi -->
+  <section class="setup-container">
+    <h2>Imposta la partita</h2>
+    <label for="numDecks">Numero di mazzi:</label>
+    <input type="number" id="numDecks" min="1" max="8" value="1" />
+    <button id="startGameBtn">Avvia partita</button>
+  </section>
+
+  <!-- Tavolo di gioco nascosto inizialmente -->
+  <main class="game-table" id="gameTable" style="display: none;">
     <div class="dealer" id="dealer">
       <h2>Banco</h2>
       <div class="hand"></div>
