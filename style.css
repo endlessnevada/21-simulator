@@ -219,6 +219,41 @@ th {
     margin: 0.5rem 0;
   }
 }
+.game-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 2rem;
+  min-height: 80vh;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.player, .dealer {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 180px;
+}
+
+.hand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.controls {
+  margin-top: 10px;
+}
+
 
 .controls button:first-child { background: #28a745; color: white; margin-right: .5rem; }
 .controls button:last-child { background: #dc3545; color: white; }
