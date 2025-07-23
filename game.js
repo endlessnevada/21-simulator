@@ -76,13 +76,13 @@ function renderPlayerHand(index) {
   const statusDiv = div.querySelector('.status');
 
   handDiv.innerHTML = '';
-  player.hand.forEach(card => {
-    const cardDiv = document.createElement('div');
+   player.hand.forEach(card => {
     const cardImg = document.createElement('img');
     cardImg.src = `cards/${getCardFilename(card)}`;
     cardImg.className = 'card';
     handDiv.appendChild(cardImg);
   });
+
 
   const score = calculateScore(player.hand);
   scoreDiv.textContent = `Punteggio: ${score}`;
