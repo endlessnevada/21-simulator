@@ -86,9 +86,16 @@ function renderPlayerHand(index) {
   const score = calculateScore(player.hand);
   scoreDiv.textContent = `Punteggio: ${score}`;
 
-  if (score > 21) {
+    if (score > 21) {
     statusDiv.textContent = 'Sballato!';
     player.stand = true;
+
+    // Se è il giocatore umano (player0), far partire i turni CPU e dealer
+    if (player.id === 'player0') {
+      setTimeout(() => {
+        cpuPlays();
+      }, 500);
+    }
   } else {
     statusDiv.textContent = '';
   }
@@ -201,4 +208,26 @@ document.getElementById('startGameBtn').addEventListener('click', () => {
   document.getElementById('gameTable').style.display = 'flex';
   document.querySelector('.setup-container').style.display = 'none';
   dealInitialCards(numDecks);
+});
+document.getElementById('resetBtn').addEventListener('click', () => {
+  // Torna alla schermata di configurazione
+  document.getElementById('gameTable').style.display = 'none';
+  document.querySelector('.setup-container').style.display = 'flex';
+
+  // Reset mani e punteggi
+  players.forEach(player => {
+    player.hand = [];
+    player.stand = false;
+    const div = document.getElementById(player.id);
+    div.querySelector('.hand').innerHTML = '';
+    div.querySelector('.score').textContent = '';
+    div.querySelector('.status').textContent = '';
+  });
+
+  dealer.hand = [];
+  dealer.stand = false;
+  const dealerDiv = document.getElementById('dealer');
+  dealerDiv.querySelector('.hand').innerHTML = '';
+  dealerDiv.querySelector('.score').textContent = '';
+  dealerDiv.querySelector('.status').textContent = '';
 });
