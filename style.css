@@ -9,7 +9,8 @@ body {
 body.tavolo-page {
  background-image: url('table-bg.png') no-repeat center center;
   background-size: cover;
- 
+   background-color: #254334; /* Sfondo default */
+
 }
 
 
