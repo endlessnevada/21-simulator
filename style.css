@@ -2,12 +2,16 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 1rem;
-  background: url('table-bg.jpg') no-repeat center center;
-  background-size: contain; /* o 'cover' se preferisci riempire */
-  background-color: #254334; /* fallback */
-  color: #fff
+  background-color: white; /* Sfondo bianco di default */
+  color: #000; /* Testo scuro */
   line-height: 1.5;
 }
+body.tavolo-page {
+  background: url('table-bg.jpg') no-repeat center center;
+  background-size: contain;
+  background-color: #254334;
+}
+
 
 h1 {
   text-align: center;
