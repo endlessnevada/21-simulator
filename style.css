@@ -13,14 +13,6 @@ body.tavolo-page {
   min-height: 100vh;
 }
 
-.main-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
 
 
 
@@ -351,4 +343,8 @@ th {
   background-color: #0056b3;
   transform: scale(1.05);
 }
-
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
