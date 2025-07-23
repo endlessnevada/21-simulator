@@ -37,6 +37,20 @@ function getCardValue(card) {
 }
 
 function calculateScore(hand) {
+function getCardFilename(card) {
+  const value = card.slice(0, -1);
+  const suitSymbol = card.slice(-1);
+  const suitNames = { '♠': 'spades', '♥': 'hearts', '♦': 'diamonds', '♣': 'clubs' };
+  const valueNames = {
+    'J': 'jack',
+    'Q': 'queen',
+    'K': 'king',
+    'A': 'ace'
+  };
+  const cardValue = valueNames[value] || value;
+  const cardSuit = suitNames[suitSymbol];
+  return `${cardValue}_of_${cardSuit}.png`;
+}
   let total = 0;
   let aces = 0;
 
@@ -64,9 +78,10 @@ function renderPlayerHand(index) {
   handDiv.innerHTML = '';
   player.hand.forEach(card => {
     const cardDiv = document.createElement('div');
-    cardDiv.className = 'card';
-    cardDiv.textContent = card;
-    handDiv.appendChild(cardDiv);
+    const cardImg = document.createElement('img');
+    cardImg.src = `cards/${getCardFilename(card)}`;
+    cardImg.className = 'card';
+    handDiv.appendChild(cardImg);
   });
 
   const score = calculateScore(player.hand);
@@ -88,9 +103,10 @@ function renderDealer() {
   handDiv.innerHTML = '';
   dealer.hand.forEach(card => {
     const cardDiv = document.createElement('div');
-    cardDiv.className = 'card';
-    cardDiv.textContent = card;
-    handDiv.appendChild(cardDiv);
+    const cardImg = document.createElement('img');
+    cardImg.src = `cards/${getCardFilename(card)}`;
+    cardImg.className = 'card';
+    handDiv.appendChild(cardImg);
   });
 
   scoreDiv.textContent = `Punteggio: ${calculateScore(dealer.hand)}`;
