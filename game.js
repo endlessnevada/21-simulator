@@ -35,8 +35,6 @@ function getCardValue(card) {
   if (value === 'A') return 11;
   return parseInt(value);
 }
-
-function calculateScore(hand) {
 function getCardFilename(card) {
   const value = card.slice(0, -1);
   const suitSymbol = card.slice(-1);
@@ -51,6 +49,7 @@ function getCardFilename(card) {
   const cardSuit = suitNames[suitSymbol];
   return `${cardValue}_of_${cardSuit}.png`;
 }
+function calculateScore(hand) {
   let total = 0;
   let aces = 0;
 
