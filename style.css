@@ -145,7 +145,7 @@ th {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #222;
+  background-color: transparent;
   color: white;
   padding: 1rem 2rem;
 }
