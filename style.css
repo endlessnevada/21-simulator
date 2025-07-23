@@ -332,3 +332,16 @@ th {
   background-color: #218838;
   transform: scale(1.05);
 }
+.navbar a.modern-button {
+  text-decoration: none;
+  margin-left: 10px;
+  background-color: #007bff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a.modern-button:hover {
+  background-color: #0056b3;
+}
