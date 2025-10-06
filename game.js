@@ -193,18 +193,19 @@ function showResults() {
 // --- CALCOLO PROBABILITÀ LIVE ---
 async function calculateLive(numDecks) {
   const player = players[0]; // giocatore umano
-  if(player.hand.length < 2 || dealer.hand.length < 1) return;
+  if (player.hand.length < 2 || dealer.hand.length < 1) return;
 
   const playerCards = player.hand.map(c => c.slice(0, -1));
   const dealerCard = dealer.hand[0].slice(0, -1);
 
+  // elementi HTML aggiornati
+  const textStay = document.getElementById("textStay");
+  const textHit = document.getElementById("textHit");
   const output = document.getElementById("output");
-  const tableStay = document.getElementById("tableStay");
-  const tableHit = document.getElementById("tableHitAgain");
-  const decisionSummary = document.getElementById("decisionSummary");
 
+  // inizializza output
+  textStay.innerHTML = textHit.innerHTML = "";
   output.innerHTML = "<p>⏳ Calcolo probabilità...</p>";
-  tableStay.innerHTML = tableHit.innerHTML = decisionSummary.innerHTML = '';
 
   let winStay = 0, lossStay = 0, pushStay = 0;
   let winHit = 0, lossHit = 0, pushHit = 0;
@@ -236,22 +237,21 @@ async function calculateLive(numDecks) {
 
   // --- Simulazioni Monte Carlo ---
   for (let i = 0; i < TOTAL; i++) {
-    // Creiamo un mazzo reale senza le carte distribuite
     let baseDeck = createDeck(numDecks).map(c => c.slice(0, -1));
     const usedCards = [...playerCards, dealerCard];
 
-    // --- STAI ---
+    // STAI
     let deckStay = [...baseDeck];
     usedCards.forEach(c => {
       const idx = deckStay.indexOf(c);
       if (idx !== -1) deckStay.splice(idx, 1);
     });
     let res1 = simulateRound(playerCards, dealerCard, [...deckStay]);
-    if (res1 === 'win') winStay++; 
-    else if (res1 === 'loss') lossStay++; 
+    if (res1 === 'win') winStay++;
+    else if (res1 === 'loss') lossStay++;
     else pushStay++;
 
-    // --- CHIEDI CARTA ---
+    // CHIEDI CARTA
     let deckHit = [...baseDeck];
     usedCards.forEach(c => {
       const idx = deckHit.indexOf(c);
@@ -260,12 +260,12 @@ async function calculateLive(numDecks) {
     let playerHandHit = [...playerCards, draw(deckHit)];
     while (getHandValueSimple(playerHandHit) < 17) playerHandHit.push(draw(deckHit));
     let res2 = simulateRound(playerHandHit, dealerCard, [...deckHit]);
-    if (res2 === 'win') winHit++; 
-    else if (res2 === 'loss') lossHit++; 
+    if (res2 === 'win') winHit++;
+    else if (res2 === 'loss') lossHit++;
     else pushHit++;
   }
 
-  // --- Calcolo intervalli di confidenza e EV ---
+  // --- Calcolo probabilità e EV ---
   function ci(count, n) { 
     const p = count / n; 
     const se = Math.sqrt(p * (1 - p) / n); 
@@ -284,21 +284,21 @@ async function calculateLive(numDecks) {
   const evStay = ev(winStay, lossStay, TOTAL);
   const evHit = ev(winHit, lossHit, TOTAL);
 
-  output.innerHTML = `
-    <h3>🟡 Se STAI:</h3>
-    <ul>
-      <li>Vittorie: ${ci(winStay, TOTAL).percent}%</li>
-      <li>Pareggi: ${ci(pushStay, TOTAL).percent}%</li>
-      <li>Sconfitte: ${ci(lossStay, TOTAL).percent}%</li>
-      <li>EV: ${evStay.value} [${evStay.lower}-${evStay.upper}]</li>
-    </ul>
-    <h3>🔠 Se CHIEDI CARTA:</h3>
-    <ul>
-      <li>Vittorie: ${ci(winHit, TOTAL).percent}%</li>
-      <li>Pareggi: ${ci(pushHit, TOTAL).percent}%</li>
-      <li>Sconfitte: ${ci(lossHit, TOTAL).percent}%</li>
-      <li>EV: ${evHit.value} [${evHit.lower}-${evHit.upper}]</li>
-    </ul>
+  // --- Aggiorna testi accanto ai grafici ---
+  textStay.innerHTML = `
+    <h3>Se STAI:</h3>
+    <p>Vittorie: ${ci(winStay, TOTAL).percent}%</p>
+    <p>Pareggi: ${ci(pushStay, TOTAL).percent}%</p>
+    <p>Sconfitte: ${ci(lossStay, TOTAL).percent}%</p>
+    <p>EV: ${evStay.value} [${evStay.lower}-${evStay.upper}]</p>
+  `;
+
+  textHit.innerHTML = `
+    <h3>Se CHIEDI CARTA:</h3>
+    <p>Vittorie: ${ci(winHit, TOTAL).percent}%</p>
+    <p>Pareggi: ${ci(pushHit, TOTAL).percent}%</p>
+    <p>Sconfitte: ${ci(lossHit, TOTAL).percent}%</p>
+    <p>EV: ${evHit.value} [${evHit.lower}-${evHit.upper}]</p>
   `;
 
   // --- Aggiorna grafici ---
@@ -316,7 +316,11 @@ async function calculateLive(numDecks) {
     data: { labels: ['Vittorie', 'Pareggi', 'Sconfitte'], datasets: [{ data: [winHit, pushHit, lossHit], backgroundColor: ['#28a745', '#ffc107', '#dc3545'] }] },
     options: { plugins: { title: { display: true, text: 'CHIEDI CARTA' } }, responsive: true }
   });
+
+  // --- Aggiorna output riepilogo ---
+  output.innerHTML = "<p>Probabilità aggiornate in tempo reale!</p>";
 }
+
 
 
 // --- EVENT LISTENERS ---
