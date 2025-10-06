@@ -191,14 +191,13 @@ function showResults() {
 }
 
 // --- CALCOLO PROBABILITÀ LIVE ---
-async function calculateLive() {
-  const numDecks = parseInt(document.getElementById("numDecks").value) || 1;
+async function calculateLive(numDecks) {
   const player = players[0]; // giocatore umano
-  if(player.hand.length<2 || dealer.hand.length<1) return;
+  if(player.hand.length < 2 || dealer.hand.length < 1) return;
 
-  const c1 = player.hand[0].slice(0,-1);
-  const c2 = player.hand[1].slice(0,-1);
-  const dealerCard = dealer.hand[0].slice(0,-1);
+  const playerCards = player.hand.map(c => c.slice(0, -1));
+  const dealerCard = dealer.hand[0].slice(0, -1);
+
   const output = document.getElementById("output");
   const tableStay = document.getElementById("tableStay");
   const tableHit = document.getElementById("tableHitAgain");
@@ -207,86 +206,118 @@ async function calculateLive() {
   output.innerHTML = "<p>⏳ Calcolo probabilità...</p>";
   tableStay.innerHTML = tableHit.innerHTML = decisionSummary.innerHTML = '';
 
-  let winStay=0, lossStay=0, pushStay=0;
-  let winHit=0, lossHit=0, pushHit=0;
+  let winStay = 0, lossStay = 0, pushStay = 0;
+  let winHit = 0, lossHit = 0, pushHit = 0;
   const TOTAL = 20000;
 
-  function getHandValueSimple(hand){
-    let total=0, aces=0;
-    for(let card of hand){
-      let val = (['J','Q','K'].includes(card)?10:(card==='A'?11:parseInt(card)));
-      total+=val; if(val===11) aces++;
+  function getHandValueSimple(hand) {
+    let total = 0, aces = 0;
+    for (let card of hand) {
+      let val = (['J','Q','K'].includes(card) ? 10 : (card === 'A' ? 11 : parseInt(card)));
+      total += val;
+      if (val === 11) aces++;
     }
-    while(total>21 && aces>0){ total-=10; aces--; }
+    while (total > 21 && aces > 0) { total -= 10; aces--; }
     return total;
   }
 
-  function draw(deck){ return deck.splice(Math.floor(Math.random()*deck.length),1)[0]; }
+  function draw(deck) { return deck.splice(Math.floor(Math.random() * deck.length), 1)[0]; }
 
-  function simulateRound(playerHand,dealerC,deck){
-    let dealerHand=[dealerC,draw(deck)];
-    while(getHandValueSimple(dealerHand)<17) dealerHand.push(draw(deck));
-    const pVal=getHandValueSimple(playerHand), dVal=getHandValueSimple(dealerHand);
-    if(pVal>21) return 'loss';
-    if(dVal>21 || pVal>dVal) return 'win';
-    if(pVal<dVal) return 'loss';
+  function simulateRound(playerHand, dealerC, deck) {
+    let dealerHand = [dealerC, draw(deck)];
+    while (getHandValueSimple(dealerHand) < 17) dealerHand.push(draw(deck));
+    const pVal = getHandValueSimple(playerHand);
+    const dVal = getHandValueSimple(dealerHand);
+    if (pVal > 21) return 'loss';
+    if (dVal > 21 || pVal > dVal) return 'win';
+    if (pVal < dVal) return 'loss';
     return 'push';
   }
 
-  for(let i=0;i<TOTAL;i++){
-    // STAI
-    let deckStay=createDeck(numDecks).map(c=>c.slice(0,-1));
-    [c1,c2,dealerCard].forEach(c=>{ const idx=deckStay.indexOf(c); if(idx!==-1) deckStay.splice(idx,1); });
-    let res1=simulateRound([c1,c2],dealerCard,[...deckStay]);
-    if(res1==='win') winStay++; else if(res1==='loss') lossStay++; else pushStay++;
+  // --- Simulazioni Monte Carlo ---
+  for (let i = 0; i < TOTAL; i++) {
+    // Creiamo un mazzo reale senza le carte distribuite
+    let baseDeck = createDeck(numDecks).map(c => c.slice(0, -1));
+    const usedCards = [...playerCards, dealerCard];
 
-    // CHIEDI CARTA
-    let deckHit=createDeck(numDecks).map(c=>c.slice(0,-1));
-    [c1,c2,dealerCard].forEach(c=>{ const idx=deckHit.indexOf(c); if(idx!==-1) deckHit.splice(idx,1); });
-    let playerHand=[c1,c2,draw(deckHit)];
-    while(getHandValueSimple(playerHand)<17) playerHand.push(draw(deckHit));
-    let res2=simulateRound(playerHand,dealerCard,[...deckHit]);
-    if(res2==='win') winHit++; else if(res2==='loss') lossHit++; else pushHit++;
+    // --- STAI ---
+    let deckStay = [...baseDeck];
+    usedCards.forEach(c => {
+      const idx = deckStay.indexOf(c);
+      if (idx !== -1) deckStay.splice(idx, 1);
+    });
+    let res1 = simulateRound(playerCards, dealerCard, [...deckStay]);
+    if (res1 === 'win') winStay++; 
+    else if (res1 === 'loss') lossStay++; 
+    else pushStay++;
+
+    // --- CHIEDI CARTA ---
+    let deckHit = [...baseDeck];
+    usedCards.forEach(c => {
+      const idx = deckHit.indexOf(c);
+      if (idx !== -1) deckHit.splice(idx, 1);
+    });
+    let playerHandHit = [...playerCards, draw(deckHit)];
+    while (getHandValueSimple(playerHandHit) < 17) playerHandHit.push(draw(deckHit));
+    let res2 = simulateRound(playerHandHit, dealerCard, [...deckHit]);
+    if (res2 === 'win') winHit++; 
+    else if (res2 === 'loss') lossHit++; 
+    else pushHit++;
   }
 
-  function ci(count,n){ const p=count/n; const se=Math.sqrt(p*(1-p)/n); const m=1.96*se; return {percent:(p*100).toFixed(2),lower:((p-m)*100).toFixed(2),upper:((p+m)*100).toFixed(2)}; }
-  function ev(w,l,n){ const v=(w-l)/n; const pWin=w/n, pLoss=l/n; const se=Math.sqrt((pWin*(1-pWin)+pLoss*(1-pLoss))/n); const m=1.96*se; return {value:v.toFixed(3),lower:(v-m).toFixed(3),upper:(v+m).toFixed(3)}; }
+  // --- Calcolo intervalli di confidenza e EV ---
+  function ci(count, n) { 
+    const p = count / n; 
+    const se = Math.sqrt(p * (1 - p) / n); 
+    const m = 1.96 * se; 
+    return { percent: (p * 100).toFixed(2), lower: ((p - m) * 100).toFixed(2), upper: ((p + m) * 100).toFixed(2) }; 
+  }
 
-  const evStay = ev(winStay,lossStay,TOTAL);
-  const evHit = ev(winHit,lossHit,TOTAL);
+  function ev(w, l, n) { 
+    const v = (w - l) / n; 
+    const pWin = w / n, pLoss = l / n; 
+    const se = Math.sqrt((pWin * (1 - pWin) + pLoss * (1 - pLoss)) / n); 
+    const m = 1.96 * se; 
+    return { value: v.toFixed(3), lower: (v - m).toFixed(3), upper: (v + m).toFixed(3) }; 
+  }
+
+  const evStay = ev(winStay, lossStay, TOTAL);
+  const evHit = ev(winHit, lossHit, TOTAL);
 
   output.innerHTML = `
     <h3>🟡 Se STAI:</h3>
     <ul>
-      <li>Vittorie: ${ci(winStay,TOTAL).percent}%</li>
-      <li>Pareggi: ${ci(pushStay,TOTAL).percent}%</li>
-      <li>Sconfitte: ${ci(lossStay,TOTAL).percent}%</li>
+      <li>Vittorie: ${ci(winStay, TOTAL).percent}%</li>
+      <li>Pareggi: ${ci(pushStay, TOTAL).percent}%</li>
+      <li>Sconfitte: ${ci(lossStay, TOTAL).percent}%</li>
       <li>EV: ${evStay.value} [${evStay.lower}-${evStay.upper}]</li>
     </ul>
     <h3>🔠 Se CHIEDI CARTA:</h3>
     <ul>
-      <li>Vittorie: ${ci(winHit,TOTAL).percent}%</li>
-      <li>Pareggi: ${ci(pushHit,TOTAL).percent}%</li>
-      <li>Sconfitte: ${ci(lossHit,TOTAL).percent}%</li>
+      <li>Vittorie: ${ci(winHit, TOTAL).percent}%</li>
+      <li>Pareggi: ${ci(pushHit, TOTAL).percent}%</li>
+      <li>Sconfitte: ${ci(lossHit, TOTAL).percent}%</li>
       <li>EV: ${evHit.value} [${evHit.lower}-${evHit.upper}]</li>
     </ul>
   `;
 
-  if(stayChart) stayChart.destroy();
-  if(hitChart) hitChart.destroy();
+  // --- Aggiorna grafici ---
+  if (stayChart) stayChart.destroy();
+  if (hitChart) hitChart.destroy();
 
-  stayChart = new Chart(document.getElementById('chartStay'),{
-    type:'doughnut',
-    data:{labels:['Vittorie','Pareggi','Sconfitte'],datasets:[{data:[winStay,pushStay,lossStay],backgroundColor:['#28a745','#ffc107','#dc3545']}]},
-    options:{plugins:{title:{display:true,text:'STAI'}},responsive:true}
+  stayChart = new Chart(document.getElementById('chartStay'), {
+    type: 'doughnut',
+    data: { labels: ['Vittorie', 'Pareggi', 'Sconfitte'], datasets: [{ data: [winStay, pushStay, lossStay], backgroundColor: ['#28a745', '#ffc107', '#dc3545'] }] },
+    options: { plugins: { title: { display: true, text: 'STAI' } }, responsive: true }
   });
 
-  hitChart = new Chart(document.getElementById('chartHit'),{
-    type:'doughnut',
-    data:{labels:['Vittorie','Pareggi','Sconfitte'],datasets:[{data:[winHit,pushHit,lossHit],backgroundColor:['#28a745','#ffc107','#dc3545']}]},
-    options:{plugins:{title:{display:true,text:'CHIEDI CARTA'}},responsive:true}
+  hitChart = new Chart(document.getElementById('chartHit'), {
+    type: 'doughnut',
+    data: { labels: ['Vittorie', 'Pareggi', 'Sconfitte'], datasets: [{ data: [winHit, pushHit, lossHit], backgroundColor: ['#28a745', '#ffc107', '#dc3545'] }] },
+    options: { plugins: { title: { display: true, text: 'CHIEDI CARTA' } }, responsive: true }
   });
 }
+
 
 // --- EVENT LISTENERS ---
 document.getElementById('startGameBtn').addEventListener('click', () => {
