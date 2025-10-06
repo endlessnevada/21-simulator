@@ -70,26 +70,27 @@
   <h2>Probabilità e decisioni consigliate</h2>
 
   <div class="stats-container">
-    <div class="charts">
+    <!-- STAI -->
+    <div class="stat-block">
       <div class="chart-box">
         <canvas id="chartStay" width="250" height="250"></canvas>
-        <h3>Se STAI</h3>
       </div>
-      <div class="chart-box">
-        <canvas id="chartHit" width="250" height="250"></canvas>
-        <h3>Se CHIEDI CARTA</h3>
-      </div>
+      <div class="text-box" id="textStay"></div>
     </div>
 
-    <div class="tables">
-      <div id="tableStay" class="table-box"></div>
-      <div id="tableHitAgain" class="table-box"></div>
-      <div id="decisionSummary" class="table-box"></div>
+    <!-- CHIEDI CARTA -->
+    <div class="stat-block">
+      <div class="chart-box">
+        <canvas id="chartHit" width="250" height="250"></canvas>
+      </div>
+      <div class="text-box" id="textHit"></div>
     </div>
   </div>
 
+  <!-- Output riassuntivo -->
   <div id="output" class="output-summary"></div>
 </section>
+
 
 
   <!-- JS -->
