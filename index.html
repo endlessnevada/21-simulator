@@ -67,17 +67,30 @@
 
     <!-- Sezione probabilità live -->
     <section class="probabilities">
-      <h2>Probabilità e decisioni consigliate</h2>
-      <div id="output"></div>
-      <div class="charts">
-        <canvas id="chartStay" width="300" height="300"></canvas>
-        <canvas id="chartHit" width="300" height="300"></canvas>
+  <h2>Probabilità e decisioni consigliate</h2>
+
+  <div class="stats-container">
+    <div class="charts">
+      <div class="chart-box">
+        <canvas id="chartStay" width="250" height="250"></canvas>
+        <h3>Se STAI</h3>
       </div>
-      <div id="tableStay"></div>
-      <div id="tableHitAgain"></div>
-      <div id="decisionSummary"></div>
-    </section>
-  </main>
+      <div class="chart-box">
+        <canvas id="chartHit" width="250" height="250"></canvas>
+        <h3>Se CHIEDI CARTA</h3>
+      </div>
+    </div>
+
+    <div class="tables">
+      <div id="tableStay" class="table-box"></div>
+      <div id="tableHitAgain" class="table-box"></div>
+      <div id="decisionSummary" class="table-box"></div>
+    </div>
+  </div>
+
+  <div id="output" class="output-summary"></div>
+</section>
+
 
   <!-- JS -->
   <script src="game.js"></script>
