@@ -6,6 +6,7 @@
   <title>Blackjack Pro - Tavolo</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="tavolo-page">
   <header class="navbar">
@@ -13,14 +14,12 @@
       <a href="index.html" class="modern-button">Tavolo</a>
       <a href="simulatore.html" class="modern-button">Simulatore</a>
     </nav>
- <div class="nav-center">
-    <h1 class="logo" style="color: #1e3d32;">♣ Blackjack Pro ♣</h1>
-  </div>
+    <div class="nav-center">
+      <h1 class="logo" style="color: #1e3d32;">♣ Blackjack Pro ♣</h1>
+    </div>
     <button id="resetBtn" class="reset-button">↩ Torna alla schermata iniziale</button>
-
   </header>
 
- 
   <!-- Selezione mazzi -->
   <section class="setup-container">
     <h2>Imposta la partita</h2>
@@ -28,7 +27,6 @@
     <input type="number" id="numDecks" min="1" max="8" value="1" />
     <button id="startGameBtn">Avvia partita</button>
   </section>
-
 
   <!-- Tavolo di gioco nascosto inizialmente -->
   <main class="game-table" id="gameTable" style="display: none;">
@@ -66,10 +64,22 @@
         <div class="status"></div>
       </div>
     </div>
+
+    <!-- Sezione probabilità live -->
+    <section class="probabilities">
+      <h2>Probabilità e decisioni consigliate</h2>
+      <div id="output"></div>
+      <div class="charts">
+        <canvas id="chartStay" width="300" height="300"></canvas>
+        <canvas id="chartHit" width="300" height="300"></canvas>
+      </div>
+      <div id="tableStay"></div>
+      <div id="tableHitAgain"></div>
+      <div id="decisionSummary"></div>
+    </section>
   </main>
 
-  <script src="simulatore.js"></script> 
-<script src="game.js"></script>     
-
+  <!-- JS -->
+  <script src="game.js"></script>
 </body>
 </html>
