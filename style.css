@@ -389,4 +389,60 @@ th {
   margin-top: 20px;
   text-align: center;
 }
+/* Stile generale */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f5;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar uniforme */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e8eceb;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar nav {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar .logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e3d32;
+  text-align: center;
+}
+
+/* Bottoni moderni */
+.modern-button, .reset-button, #startGameBtn {
+  background: #1e3d32;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modern-button:hover, .reset-button:hover, #startGameBtn:hover {
+  background: #2c5246;
+}
+
+/* Contenitori uniformi */
+.setup-container, .probabilities {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
 
