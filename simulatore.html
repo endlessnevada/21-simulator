@@ -21,30 +21,37 @@
   </header>
 
   <!-- Form input -->
-  <section class="setup-container">
-    <h2>Imposta la simulazione</h2>
-    <div class="form-container">
-      <label>Numero di mazzi: 
-        <input type="number" id="numDecks" value="6">
-      </label>
-      <label>Prima carta giocatore: 
-        <input type="text" id="c1">
-      </label>
-      <label>Seconda carta giocatore: 
-        <input type="text" id="c2">
-      </label>
-      <label>Carta scoperta banco: 
-        <input type="text" id="dealer">
-      </label>
-      <label>
-        <input type="checkbox" id="showDetails"> Mostra analisi dettagliata
-      </label>
-      <label>
-        <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"> Modalità scura
-      </label>
-      <button onclick="calculate()">Calcola Probabilità</button>
-    </div>
-  </section>
+ <section class="setup-container">
+  <h2>Imposta la simulazione</h2>
+  <div class="form-container">
+    <label>Numero di mazzi:
+      <input type="number" id="numDecks" value="6">
+    </label>
+
+    <label>Prima carta del player:
+      <input type="text" id="c1">
+    </label>
+
+    <label>Seconda carta del player:
+      <input type="text" id="c2">
+    </label>
+
+    <label>Prima carta scoperta del banco:
+      <input type="text" id="dealer">
+    </label>
+
+    <label>
+      <input type="checkbox" id="showDetails"> Mostra analisi dettagliata
+    </label>
+
+    <label>
+      <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"> Modalità scura
+    </label>
+
+    <button onclick="calculate()">Calcola Probabilità</button>
+  </div>
+</section>
+
 
   <!-- Risultati grafici -->
   <section class="probabilities">
@@ -76,3 +83,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
