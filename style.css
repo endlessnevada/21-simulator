@@ -231,66 +231,76 @@ input[type="checkbox"] {
 
 
 /* ========= RESPONSIVE MOBILE ========= */
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   body {
-    overflow-x: hidden;
+    overflow-x: hidden; /* niente scroll orizzontale */
   }
 
   .game-table {
     flex-direction: column;
-    padding: 1rem;
-    gap: 20px;
     align-items: center;
+    gap: 15px;
+    padding: 1rem;
   }
 
   .bottom-row {
     display: flex;
+    flex-wrap: wrap; /* permette ai giocatori di andare su più righe */
     justify-content: center;
-    flex-wrap: nowrap; /* affianca i giocatori */
-    gap: 5px;
+    gap: 10px; /* margine tra giocatori ridotto */
     width: 100%;
-    max-width: 100%;
   }
 
   .player, .dealer {
-    flex: 1 1 auto;
-    max-width: 60px; /* ridotto drasticamente per rientrare nello schermo */
+    flex: 1 1 auto; /* si ridimensionano in base allo spazio disponibile */
+    max-width: 120px; /* larghezza massima per mobile */
+    min-width: 60px; /* non troppo piccole */
     padding: 5px;
     font-size: 0.75rem;
     text-align: center;
+    box-sizing: border-box;
   }
 
   #player0 {
-    max-width: 60px; /* giocatore principale leggermente più largo */
-  }
-
-  #dealer {
-    max-width: 50px;
+    max-width: 140px; /* giocatore principale leggermente più largo */
   }
 
   .hand {
-    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap; /* carte su più righe se serve */
     justify-content: center;
     gap: 2px;
+    overflow-x: hidden;
   }
 
   .card {
-    width: 30px;
-    border-radius: 2px;
+    width: 35px; /* carte più piccole su mobile */
+    border-radius: 3px;
   }
 
   .score {
     font-size: 0.7rem;
+    margin-top: 0.3rem;
   }
 
   .controls button {
-    padding: 2px 5px;
+    padding: 2px 4px;
     font-size: 0.65rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .navbar nav {
+    flex-direction: column;
+    gap: 5px;
   }
 
   .navbar .logo {
     font-size: 1.2rem;
+    text-align: center;
   }
 }
-
-
