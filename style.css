@@ -1,4 +1,4 @@
-mi rendi responsive questo codice :/* ========= BASE ========= */
+/* ========= BASE ========= */
 html, body {
   font-family: 'Inter', sans-serif;
   margin: 0;
@@ -195,3 +195,4 @@ body.tavolo-page .setup-container {
     width: 40px; /* ancora più piccole su schermi stretti */
   }
 }
+
