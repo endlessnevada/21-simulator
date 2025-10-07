@@ -254,18 +254,18 @@ input[type="checkbox"] {
 
   .player, .dealer {
     flex: 1 1 auto;
-    max-width: 90px; /* ridotto drasticamente per rientrare nello schermo */
+    max-width: 60px; /* ridotto drasticamente per rientrare nello schermo */
     padding: 5px;
     font-size: 0.75rem;
     text-align: center;
   }
 
   #player0 {
-    max-width: 100px; /* giocatore principale leggermente più largo */
+    max-width: 60px; /* giocatore principale leggermente più largo */
   }
 
   #dealer {
-    max-width: 90px;
+    max-width: 50px;
   }
 
   .hand {
@@ -292,4 +292,5 @@ input[type="checkbox"] {
     font-size: 1.2rem;
   }
 }
+
 
