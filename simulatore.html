@@ -6,54 +6,73 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
-  <nav>
-  <a href="index.html">Tavolo</a>
-  <a href="simulatore.html">Simulatore</a>
-</nav>
 
-  <h1>🃏 Simulatore Blackjack</h1>
-
-  <div class="form-container">
-    <label>Numero di mazzi: <input type="number" id="numDecks" value="6"></label>
-    <label>Prima carta giocatore: <input type="text" id="c1"></label>
-    <label>Seconda carta giocatore: <input type="text" id="c2"></label>
-    <label>Carta scoperta banco: <input type="text" id="dealer"></label>
-    <label><input type="checkbox" id="showDetails"> Mostra analisi dettagliata della pesca</label>
-    <label><input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"> Modalità scura</label>
-    <button onclick="calculate()">Calcola Probabilità</button>
-  </div>
-
-<div class="output-section">
-  <div class="chart-result">
-    <div class="chart-box">
-      <canvas id="chartStay"></canvas>
+  <!-- Navbar uniforme -->
+  <header class="navbar">
+    <nav>
+      <a href="index.html" class="modern-button">Tavolo</a>
+      <a href="simulatore.html" class="modern-button">Simulatore</a>
+    </nav>
+    <div class="nav-center">
+      <h1 class="logo">🃏 Blackjack Simulator</h1>
     </div>
-    
-    <div class="chart-text" id="output"></div>
-    
-    <div class="chart-box">
-      <canvas id="chartHit"></canvas>
+  </header>
+
+  <!-- Form input -->
+  <section class="setup-container">
+    <h2>Imposta la simulazione</h2>
+    <div class="form-container">
+      <label>Numero di mazzi: 
+        <input type="number" id="numDecks" value="6">
+      </label>
+      <label>Prima carta giocatore: 
+        <input type="text" id="c1">
+      </label>
+      <label>Seconda carta giocatore: 
+        <input type="text" id="c2">
+      </label>
+      <label>Carta scoperta banco: 
+        <input type="text" id="dealer">
+      </label>
+      <label>
+        <input type="checkbox" id="showDetails"> Mostra analisi dettagliata
+      </label>
+      <label>
+        <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"> Modalità scura
+      </label>
+      <button onclick="calculate()">Calcola Probabilità</button>
     </div>
-  </div>
-</div>
+  </section>
 
-<div class="table-pair">
-  <div class="table-box" id="tableStay"></div>
-  <div class="table-box" id="tableHitAgain"></div>
-</div>
+  <!-- Risultati grafici -->
+  <section class="probabilities">
+    <h2>Risultati della simulazione</h2>
+    <div class="output-section">
+      <div class="chart-result">
+        <div class="chart-box">
+          <canvas id="chartStay"></canvas>
+        </div>
 
+        <div class="chart-text" id="output"></div>
 
+        <div class="chart-box">
+          <canvas id="chartHit"></canvas>
+        </div>
+      </div>
+    </div>
 
-  <div class="table-container">
-    <div id="tableStay"></div>
-    <div id="tableHitAgain"></div>
-  </div>
+    <!-- Tabelle -->
+    <div class="table-pair">
+      <div class="table-box" id="tableStay"></div>
+      <div class="table-box" id="tableHitAgain"></div>
+    </div>
 
+    <!-- Riassunto finale -->
+    <div id="decisionSummary" class="output-summary"></div>
+  </section>
 
-  <div id="decisionSummary"></div>
   <script src="script.js"></script>
 </body>
 </html>
