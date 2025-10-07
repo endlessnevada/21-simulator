@@ -6,7 +6,6 @@ body {
   background-color: #f4f6f5;
   color: #000;
   line-height: 1.5;
-  overflow-x: hidden; /* evita lo scroll orizzontale */
 }
 
 /* Sfondo specifico per la pagina del tavolo */
@@ -26,7 +25,6 @@ body.tavolo-page {
   background: #e8eceb;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  position: relative;
 }
 
 .navbar nav {
@@ -71,6 +69,7 @@ button:hover,
   transform: scale(1.05);
 }
 
+/* Bottoni specifici */
 .controls button:first-child { background: #28a745; }
 .controls button:last-child { background: #dc3545; }
 .controls button:first-child:hover { background: #218838; }
@@ -95,6 +94,7 @@ button:hover,
   color: #000;
 }
 
+/* Setup in tavolo con effetto vetro */
 body.tavolo-page .setup-container {
   background: rgba(255, 255, 255, 0.1);
   color: white;
@@ -207,7 +207,7 @@ body.tavolo-page .setup-container {
   flex-direction: column;
   gap: 6px;
   min-width: 220px;
-  flex: 1 1 220px;
+  flex: 1 1 220px; /* flessibile ma non sotto i 220px */
 }
 
 .input-block label {
@@ -258,21 +258,23 @@ input[type="checkbox"] {
     padding: 1rem;
   }
 
-  /* Disposizione giocatori in una riga su mobile */
+  /* Bottom row mobile: tutti in fila centrati */
   .bottom-row {
     flex-direction: row;
     justify-content: center;
-    align-items: stretch;
+    align-items: flex-end;
     gap: 8px;
     flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   /* CPU ridotte */
   #player1, #player2 {
-    flex: 0 0 90px;
+    flex: 0 0 auto;
+    width: 60px;
     font-size: 0.7rem;
     padding: 4px;
-    min-width: auto;
   }
 
   #player1 .card, 
@@ -280,13 +282,30 @@ input[type="checkbox"] {
     width: 35px;
   }
 
-  /* Giocatore principale al centro */
+  /* Giocatore principale più grande e al centro */
   #player0 {
     flex: 1 1 auto;
-    max-width: 180px;
+    max-width: 120px;
   }
 
   #player0 .card {
     width: 50px;
+  }
+
+  .player, .dealer {
+    min-width: unset;
+  }
+
+  .hand {
+    gap: 4px;
+  }
+
+  .score {
+    font-size: 0.85rem;
+  }
+
+  .controls button {
+    padding: 4px 8px;
+    font-size: 0.75rem;
   }
 }
