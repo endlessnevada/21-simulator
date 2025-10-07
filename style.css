@@ -8,6 +8,7 @@ html, body {
   line-height: 1.5;
   max-width: 100%;
   overflow-x: hidden; /* blocca scroll orizzontale */
+  box-sizing: border-box;
 }
 
 body.tavolo-page {
@@ -154,4 +155,92 @@ body.tavolo-page .setup-container {
 .score { 
   margin-top: 0.5rem; 
   font-weight: 600; 
+}
+
+/* ========= INPUT NUMERI ========= */
+input[type="number"], 
+input[type="text"] {
+  font-size: 16px; /* evita zoom automatico su mobile */
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .navbar nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar .logo {
+    text-align: center;
+    flex: 100%;
+    font-size: 1.5rem;
+  }
+
+  .nav-right {
+    justify-content: center;
+    flex: 100%;
+  }
+
+  .setup-container, 
+  .probabilities {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .game-table {
+    padding: 1rem;
+    gap: 20px;
+  }
+
+  .player, .dealer {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .card {
+    width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar .logo {
+    font-size: 1.2rem;
+  }
+
+  button, 
+  .modern-button, 
+  .reset-button, 
+  #startGameBtn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  .card {
+    width: 40px;
+  }
+
+  .setup-container, 
+  .probabilities {
+    padding: 10px;
+  }
+
+  input[type="number"], 
+  input[type="text"] {
+    font-size: 16px; /* conferma font sufficiente a bloccare zoom */
+  }
 }
