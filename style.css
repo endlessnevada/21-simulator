@@ -1,3 +1,235 @@
+/* ========= BASE ========= */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f5;
+  color: #000;
+  line-height: 1.5;
+}
+
+/* Sfondo specifico per la pagina del tavolo */
+body.tavolo-page {
+  background-color: #1e3d32;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: white;
+}
+
+/* ========= NAVBAR ========= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e8eceb;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar nav {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar .logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e3d32;
+  text-align: center;
+  margin: 0;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ========= BOTTONI ========= */
+button, 
+.modern-button, 
+.reset-button, 
+#startGameBtn {
+  background: #1e3d32;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover, 
+.modern-button:hover, 
+.reset-button:hover, 
+#startGameBtn:hover {
+  background: #2c5246;
+  transform: scale(1.05);
+}
+
+/* Bottoni specifici */
+.controls button:first-child { background: #28a745; }
+.controls button:last-child { background: #dc3545; }
+.controls button:first-child:hover { background: #218838; }
+.controls button:last-child:hover { background: #bb2d3b; }
+
+.reset-button {
+  background-color: #dc3545;
+}
+.reset-button:hover {
+  background-color: #bb2d3b;
+}
+
+/* ========= CONTENITORI ========= */
+.setup-container, 
+.probabilities {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  color: #000;
+}
+
+/* Setup in tavolo con effetto vetro */
+body.tavolo-page .setup-container {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+/* ========= STRUTTURA DEL TAVOLO ========= */
+.game-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 2rem;
+  min-height: 80vh;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.player, .dealer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  min-width: 220px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.hand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.card {
+  width: 60px;
+  border-radius: 4px;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.2);
+}
+
+.score { 
+  margin-top: 0.5rem; 
+  font-weight: 600; 
+}
+
+/* ========= PROBABILITÀ ========= */
+.stats-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.stat-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.chart-box {
+  width: 250px;
+  height: 250px;
+}
+
+.text-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #000;
+}
+
+.output-summary {
+  background-color: #fff3cd;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  font-weight: 500;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ========= FORM ========= */
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+  flex: 1 1 220px; /* flessibile ma non sotto i 220px */
+}
+
+.input-block label {
+  font-weight: 500;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"] {
+  border: 1px solid #333;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #000;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.1);
+  margin-right: 6px;
+}
+
+
 /* ========= RESPONSIVE MOBILE ========= */
 @media (max-width: 768px) {
   body {
