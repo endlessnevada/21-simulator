@@ -108,6 +108,15 @@ body.tavolo-page .setup-container {
   backdrop-filter: blur(5px);
 }
 
+/* ========= GRAFICI ========= */
+.probabilities canvas,
+.probabilities svg {
+  width: clamp(200px, 50%, 400px); /* scala da 200px a 400px */
+  height: auto;                     /* mantiene proporzioni */
+  display: block;
+  margin: 0 auto;                   /* centrato */
+}
+
 /* ========= STRUTTURA DEL TAVOLO ========= */
 .game-table {
   display: flex;
