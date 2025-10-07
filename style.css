@@ -233,108 +233,62 @@ input[type="checkbox"] {
 /* ========= RESPONSIVE MOBILE ========= */
 @media (max-width: 768px) {
   body {
-    overflow-x: hidden; /* evita scroll orizzontale */
-  }
-
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .navbar nav {
-    flex-direction: column;
-    width: 100%;
-    gap: 6px;
-  }
-
-  .navbar nav a {
-    margin: 0.3rem 0;
-    text-align: center;
-  }
-
-  .nav-center {
-    position: relative;
-    left: 0;
-    transform: none;
-    margin: 5px 0;
+    overflow-x: hidden;
   }
 
   .game-table {
     flex-direction: column;
     padding: 1rem;
     gap: 20px;
+    align-items: center;
   }
 
   .bottom-row {
     display: flex;
-    flex-wrap: wrap; /* le carte si adattano su più righe */
     justify-content: center;
-    gap: 10px;
+    flex-wrap: nowrap; /* affianca i giocatori */
+    gap: 5px;
     width: 100%;
+    max-width: 100%;
   }
 
   .player, .dealer {
-    min-width: unset;
-    padding: 10px;
-    font-size: 0.85rem;
     flex: 1 1 auto;
-    max-width: 120px; /* limita la larghezza per mobile */
+    max-width: 90px; /* ridotto drasticamente per rientrare nello schermo */
+    padding: 5px;
+    font-size: 0.75rem;
+    text-align: center;
   }
 
   #player0 {
-    max-width: 140px; /* giocatore principale leggermente più largo */
+    max-width: 100px; /* giocatore principale leggermente più largo */
   }
 
-  #player1, #player2 {
-    max-width: 80px; /* CPU più piccole */
+  #dealer {
+    max-width: 90px;
   }
 
   .hand {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 4px;
-    overflow-x: hidden; /* evita scroll interno */
+    gap: 2px;
   }
 
   .card {
-    width: 40px; /* carte più piccole su mobile */
-    border-radius: 3px;
-    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    width: 30px;
+    border-radius: 2px;
   }
 
   .score {
-    font-size: 0.8rem;
-    margin-top: 0.3rem;
-  }
-
-  .controls button {
-    padding: 4px 6px;
     font-size: 0.7rem;
   }
 
-  .setup-container, 
-  .probabilities {
-    margin: 10px;
-    padding: 15px;
-    max-width: 95%;
+  .controls button {
+    padding: 2px 5px;
+    font-size: 0.65rem;
   }
 
-  .stats-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .chart-box {
-    width: 180px;
-    height: 180px;
-  }
-
-  .text-box {
-    font-size: 0.85rem;
-  }
-
-  .output-summary {
-    font-size: 0.85rem;
+  .navbar .logo {
+    font-size: 1.2rem;
   }
 }
