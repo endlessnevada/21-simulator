@@ -1,15 +1,15 @@
 /* ========= BASE ========= */
-html, body {
+body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f6f5;
   color: #000;
   line-height: 1.5;
-  max-width: 100%;
-  overflow-x: hidden; /* blocca scroll orizzontale */
+  overflow-x: hidden; /* evita lo scroll orizzontale */
 }
 
+/* Sfondo specifico per la pagina del tavolo */
 body.tavolo-page {
   background-color: #1e3d32;
   display: flex;
@@ -23,32 +23,29 @@ body.tavolo-page {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   background: #e8eceb;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
 }
 
 .navbar nav {
   display: flex;
   gap: 10px;
-  flex: 1;
 }
 
 .navbar .logo {
-  flex: 1;
-  text-align: center;
   font-size: 1.8rem;
   font-weight: 600;
   color: #1e3d32;
+  text-align: center;
   margin: 0;
 }
 
-.nav-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* ========= BOTTONI ========= */
@@ -114,15 +111,13 @@ body.tavolo-page .setup-container {
   gap: 40px;
   padding: 2rem;
   min-height: 80vh;
-  box-sizing: border-box;
 }
 
 .bottom-row {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap; /* va a capo su mobile */
+  gap: 40px;
 }
 
 .player, .dealer {
@@ -132,8 +127,7 @@ body.tavolo-page .setup-container {
   border-radius: 12px;
   color: white;
   text-align: center;
-  flex: 1 1 200px; /* adattivo */
-  max-width: 280px;
+  min-width: 220px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
@@ -156,28 +150,137 @@ body.tavolo-page .setup-container {
   font-weight: 600; 
 }
 
+/* ========= PROBABILITÀ ========= */
+.stats-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.stat-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.chart-box {
+  width: 250px;
+  height: 250px;
+}
+
+.text-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #000;
+}
+
+.output-summary {
+  background-color: #fff3cd;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  font-weight: 500;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ========= FORM ========= */
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+  flex: 1 1 220px;
+}
+
+.input-block label {
+  font-weight: 500;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"] {
+  border: 1px solid #333;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #000;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.1);
+  margin-right: 6px;
+}
+
 /* ========= RESPONSIVE ========= */
 @media (max-width: 768px) {
   .navbar {
-     flex-direction: row;   /* invece di colonna */
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: nowrap;     /* così non vanno a capo */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
-  /* CPU più piccole su mobile */
+  .nav-center {
+    position: static;
+    transform: none;
+    margin: 10px 0;
+  }
+
+  .navbar nav {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .navbar nav a {
+    margin: 0.5rem 0;
+  }
+
+  .game-table {
+    gap: 20px;
+    padding: 1rem;
+  }
+
+  /* Disposizione giocatori in una riga su mobile */
+  .bottom-row {
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  /* CPU ridotte */
   #player1, #player2 {
     flex: 0 0 90px;
     font-size: 0.7rem;
     padding: 4px;
+    min-width: auto;
   }
 
   #player1 .card, 
   #player2 .card {
-    width: 35px; /* carte più piccole */
+    width: 35px;
   }
 
-  /* Player principale resta leggibile */
+  /* Giocatore principale al centro */
   #player0 {
     flex: 1 1 auto;
     max-width: 180px;
@@ -186,33 +289,4 @@ body.tavolo-page .setup-container {
   #player0 .card {
     width: 50px;
   }
-
-  .navbar nav {
-    justify-content: center;
-    flex: unset;
-  }
-
-  .navbar .logo {
-    order: -1; /* porta il titolo sopra */
-    width: 100%;
-  }
-
-  .game-table {
-    padding: 1rem;
-    gap: 20px;
-  }
-
-  .bottom-row {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-
-
-@media (max-width: 400px) {
-  .card {
-    width: 40px; /* ancora più piccole su schermi stretti */
-  }
 }
-
