@@ -226,9 +226,22 @@ input[type="checkbox"] {
 }
 
 /* Etichette in riga con input */
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;       /* manda a capo quando serve */
+  gap: 15px 25px;        /* spaziatura verticale e orizzontale */
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .form-container label {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 0.95rem;
+  min-width: 250px;      /* ogni blocco ha una larghezza minima */
 }
+
+
