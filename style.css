@@ -159,9 +159,32 @@ body.tavolo-page .setup-container {
 /* ========= RESPONSIVE ========= */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: center;
+     flex-direction: row;   /* invece di colonna */
+    justify-content: center;
     gap: 8px;
+    flex-wrap: nowrap;     /* così non vanno a capo */
+  }
+
+  /* CPU più piccole su mobile */
+  #player1, #player2 {
+    flex: 0 0 90px;
+    font-size: 0.7rem;
+    padding: 4px;
+  }
+
+  #player1 .card, 
+  #player2 .card {
+    width: 35px; /* carte più piccole */
+  }
+
+  /* Player principale resta leggibile */
+  #player0 {
+    flex: 1 1 auto;
+    max-width: 180px;
+  }
+
+  #player0 .card {
+    width: 50px;
   }
 
   .navbar nav {
@@ -185,13 +208,11 @@ body.tavolo-page .setup-container {
     align-items: center;
   }
 
-  .card {
-    width: 45px; /* carte più piccole su mobile */
-  }
-}
+
 
 @media (max-width: 400px) {
   .card {
     width: 40px; /* ancora più piccole su schermi stretti */
   }
 }
+
